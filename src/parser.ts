@@ -128,7 +128,7 @@ function buildTree(lines: ParsedLine[]): MarketchNode[] {
       node.props = line.props;
       node.children = [];
     } else if (line.type === 'component') {
-      node.componentType = line.componentType as any;
+      node.componentType = line.componentType as 'Button' | 'Input' | 'Text' | 'Image' | 'Icon';
       node.content = line.content;
       node.props = line.props;
     } else if (line.type === 'title') {
