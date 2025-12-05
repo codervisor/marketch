@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { parseMarketch } from './parser'
+import { Renderer } from './Renderer'
 
 const defaultCode = `# Page Title
 > Card (padding: large)
@@ -9,13 +11,14 @@ const defaultCode = `# Page Title
 
 function App() {
   const [code, setCode] = useState(defaultCode)
+  const ast = parseMarketch(code)
 
   return (
     <div className="flex h-screen w-screen overflow-hidden">
       {/* Left Panel - Editor */}
       <div className="w-1/2 border-r-2 border-black flex flex-col">
         <div className="bg-gray-100 border-b-2 border-black p-4">
-          <h2 className="text-lg font-bold">Marketch Editor</h2>
+          <h2 className="text-sm uppercase tracking-wide font-bold">Marketch Editor</h2>
         </div>
         <textarea
           value={code}
@@ -28,12 +31,10 @@ function App() {
       {/* Right Panel - Preview */}
       <div className="w-1/2 flex flex-col">
         <div className="bg-gray-100 border-b-2 border-black p-4">
-          <h2 className="text-lg font-bold">Preview</h2>
+          <h2 className="text-sm uppercase tracking-wide font-bold">Preview</h2>
         </div>
         <div className="flex-1 p-4 bg-white overflow-auto">
-          <div className="text-gray-500 text-center mt-8">
-            Preview will render here...
-          </div>
+          <Renderer nodes={ast} />
         </div>
       </div>
     </div>

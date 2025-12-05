@@ -13,7 +13,6 @@ export interface MarketchNode {
   content?: string;
   props?: Record<string, string>;
   children?: MarketchNode[];
-  indent?: number;
 }
 
 interface ParsedLine {
@@ -124,7 +123,6 @@ function buildTree(lines: ParsedLine[]): MarketchNode[] {
 
     const node: MarketchNode = {
       type: line.type as 'container' | 'component' | 'title',
-      indent: line.indent,
     };
 
     if (line.type === 'container') {
