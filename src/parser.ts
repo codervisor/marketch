@@ -1,5 +1,9 @@
 /**
  * Marketch Parser - Converts Marketch DSL to AST
+ * 
+ * MVP Limitations:
+ * - Props parsing doesn't handle nested parentheses or commas within values
+ * - This is acceptable for the MVP scope as defined in the specification
  */
 
 export interface MarketchNode {
@@ -102,7 +106,7 @@ function parseContentAndProps(text: string): { content: string; props?: Record<s
     }
     
     // Remove props from content
-    content = text.substring(0, propsMatch.index).trim();
+    content = text.substring(0, propsMatch.index ?? text.length).trim();
   }
   
   return { content, props };
